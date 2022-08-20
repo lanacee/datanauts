@@ -1,0 +1,17 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Fruit Fly</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'app/style.css' %}" />
+    {% comment %} <link rel="stylesheet" type="text/css" href="{% static 'app/reset.css' %}" /> {% endcomment %}
+    <link rel="icon"href="{% static 'favicon.ico' %}">
+  </head>
+  <body>
+    {% block content %} {% endblock %}
+    <footer>
+      {% block page_scripts %} {# Specific template scripts here #} {% endblock %}
+    </footer>
+  </body>
+</html>
