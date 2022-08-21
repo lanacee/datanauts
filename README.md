@@ -15,6 +15,12 @@
 
 - [https://www.youtube.com/watch?v=Gsn4ufs\_\_EA&feature=youtu.be](https://www.youtube.com/watch?v=lZK5bui-B1A)
 
+## Technical Details
+
+Full Stack Web App with authentication.
+Front-End: _React_
+Back-End: _Django_
+
 ## How to run it
 
 - python3 -m venv venv
@@ -27,3 +33,10 @@
 
 ![Readme](docs/CheckIfFound.png)
 ![Readme](docs/ReviewRegistered.png)
+
+## Contributors
+
+- Michael Lisitsa - [https://github.com/michaellisitsa](https://github.com/michaellisitsa)
+- Regina Chow - [https://rchow.dev/](https://rchow.dev/)
+- Lana Cowling - [https://github.com/lanacee](https://github.com/lanacee)
+- Dave Cole - [https://github.com/dmc-au](https://github.com/dmc-au)
