@@ -7,7 +7,7 @@ class PestTrap(models.Model):
     name = models.CharField(max_length=100)
     UniqueId = models.CharField(max_length=50)
     description = models.CharField(max_length=255)
-    users = models.ManyToManyField(User)
+    users = models.ManyToManyField(User, blank=True)
 
 # Create your models here.
 class Observation(models.Model):
