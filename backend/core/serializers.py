@@ -6,13 +6,13 @@ class PestTrapSerializer(serializers.ModelSerializer):
     # See discussion https://stackoverflow.com/a/64991320
     def create(self, validated_data):
 
-        request = self.context.get("request")
+        # request = self.context.get("request")
 
         pest_trap = PestTrap()
         pest_trap.name = validated_data["name"]
-        pest_trap.uniqueId = validated_data["uniqueId"]
+        pest_trap.UniqueId = validated_data["uniqueId"]
         pest_trap.description = validated_data["description"]
-        pest_trap.user = request.user
+        # pest_trap.users = request.user
 
         pest_trap.save()
 
@@ -29,5 +29,5 @@ class PestTrapSerializer(serializers.ModelSerializer):
         model = PestTrap
         # https://www.django-rest-framework.org/api-guide/relations/
 
-        exclude = ["user"]
-        extra_kwargs = {"user": {"required": False}}
+        exclude = ["users"]
+        extra_kwargs = {"users": {"required": False}}

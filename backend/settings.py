@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'backend.core',
+    "rest_framework",
 ]
 
 MIDDLEWARE = [
@@ -125,3 +126,10 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Set up Django and React together and deploy on Heroku
+# https://dev.to/shakib609/deploy-your-django-react-js-app-to-heroku-2bck
+# https://librenepal.com/article/django-and-create-react-app-together-on-heroku/
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "frontend/build/static"),
+]
