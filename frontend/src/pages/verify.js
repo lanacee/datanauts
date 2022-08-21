@@ -32,20 +32,17 @@ export default function Verify() {
     fetch("/api/pestTrap/")
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
         setPestTraps(data);
       });
     fetch("/api/profile/")
       .then((response) => response.json())
       .then((data) => {
         setProfile(data);
-        console.log(data[0].id);
       });
   }, []);
 
   function addMeToTrap(e, pestTrap) {
     e.preventDefault();
-    console.log("Pest trap body", pestTrap);
     fetch(`/api/pestTrap/${pestTrap.id}/`, {
       method: "put",
       headers: {
@@ -63,83 +60,6 @@ export default function Verify() {
         setSubscribed(true);
       });
   }
-
-  // return (
-  //   <div className="App">
-  //     <h1>Find Your Fly Trap</h1>
-  //     <form>
-  //       <label htmlFor="uniqueId">Type in the Unique Id Posted to you:</label>
-  //       <input
-  //         onChange={(event) => setUniqueId(event.target.value)}
-  //         value={uniqueId}
-  //         name="uniqueId"
-  //         type="text"
-  //         placeholder="Enter Unique Id"
-  //       />
-  //     </form>
-  //     <h2>Subscribed Traps</h2>
-  //     <ol>
-  //       {pestTraps
-  //         .filter((pestTrap) => {
-  //           console.log("pest trap profile", profile[0].id);
-  //           return pestTrap.users.some((user) => {
-  //             console.log("user id", user);
-  //             console.log("profile id", profile[0].id);
-  //             return user == profile[0].id;
-  //           });
-  //         })
-  //         .map((pestTrap) => (
-  //           <li key={pestTrap.id}>
-  //             <p>Name: {pestTrap.name}</p>
-  //             <p>Description: {pestTrap.description}</p>
-  //             {subscribed && (
-  //               <div>
-  //                 <b>Success! You are now subscribed</b>
-  //               </div>
-  //             )}
-  //           </li>
-  //         ))}
-  //     </ol>
-  //     <form>
-  //       <ol>
-  //         {pestTraps
-  //           .filter((pestTrap) => pestTrap.UniqueId === uniqueId)
-  //           .map((pestTrap) => (
-  //             <li key={pestTrap.id}>
-  //               <p>Name: {pestTrap.name}</p>
-  //               <p>Description: {pestTrap.description}</p>
-  //               {/* <ul>{pestTrap.users.map((user, index) => <li key={index}>{user}</li>)}</ul> */}
-  //               {!subscribed ? (
-  //                 <>
-  //                   <Button
-  //                     className="btn btn-primary"
-  //                     onClick={(event) => addMeToTrap(event, pestTrap)}
-  //                   >
-  //                     Subscribe to Pest Trap
-  //                   </Button>
-  //                 </>
-  //               ) : (
-  //                 <>
-  //                   <h2>There are no reported events at this Fruit Trap</h2>
-  //                   <img
-  //                     src="https://www.moira.vic.gov.au/files/content/public/business/queensland-fruit-fly-project/qff-logo-update-red.png?dimension=pageimage&w=480"
-  //                     alt=""
-  //                     srcset=""
-  //                   />
-  //                 </>
-  //               )}
-  //               {subscribed && (
-  //                 <div>
-  //                   <b>Success! You are now subscribed</b>
-  //                 </div>
-  //               )}
-  //             </li>
-  //           ))}
-  //       </ol>
-  //     </form>
-  //   </div>
-  // );
-  // }
 
   return (
     <div className={css({ marginTop: "40px" })}>

@@ -13,14 +13,12 @@ export default function Verify() {
     fetch("/api/pestTrap/")
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
         setPestTraps(data);
       });
     fetch("/api/profile/")
       .then((response) => response.json())
       .then((data) => {
         setProfile(data);
-        console.log(data[0].id);
       });
   }, []);
 
@@ -30,11 +28,8 @@ export default function Verify() {
         <ol>
           {pestTraps
             .filter((pestTrap) => {
-              console.log("pest trap profile", profile[0].id);
               return pestTrap.users.some((user) => {
-                console.log("user id", user);
-                console.log("profile id", profile[0].id);
-                return user == profile[0].id;
+                return user == profile?.[0]?.id;
               });
             })
             .map((pestTrap) => (

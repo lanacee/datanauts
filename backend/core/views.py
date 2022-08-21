@@ -29,12 +29,6 @@ def signup(request):
         form = UserCreationForm()
     return render(request, 'signup.html', {'form': form})
 
-
-# class CurrentUserView(APIView):
-#     def get(self, request):
-#         serializer = UserSerializer(request.user)
-#         return Response(serializer.data)
-
 class UserViewSet2(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
@@ -73,40 +67,16 @@ class PestTrapViewSet(viewsets.ModelViewSet):
     queryset = PestTrap.objects.all()
     serializer_class = PestTrapSerializer
 
-    # def get_queryset(self):
-    #     req = self.request
-    #     if req:
-    #         self.queryset = PestTrap.objects.filter(users=req.user)
-    #         print("request accessed")
-    #         return self.queryset
-    #     else:
-    #         print("request not accessed")
-    #         return self.queryset
-
     def update(self, request, pk=None, *args, **kwargs):
         user = request.user
         instance = self.get_object()
         print(" user ", instance.users)
         print(" user ", user.id)
         print(" data ", request.data)
-        instance.users.add(user)
+        instance.users.add(user) #doesn't appear to work
         instance.save()
         print(" modified instance ", instance.users)
-        # modified_data = request.data['users'].append(user.id)
-        # print(" data modified ", modified_data)
-        # data = {
-        #     "title": reques/avatar/9ba3bc1536585f5c59760e2888a6e6f4t.POST.get('title', None),
-        #     }
-        # serializer = self.serializer_class(instance=instance,
-        #                                    data=request.data, # or request.data
-        #                                 #    context={'author': user},
-        #                                    partial=True)
-        # if serializer.is_valid():
-        #     serializer.save()
-        #     return Response(data=serializer.data, status=status.HTTP_201_CREATED)
-        # else:
-        #     return Response(data=serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
+        
         serializer = self.get_serializer(instance, data=request.data)
         serializer.is_valid(raise_exception=True)
         self.perform_update(serializer)
