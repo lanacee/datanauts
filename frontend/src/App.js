@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import "./App.css";
-import Button from 'react-bootstrap/Button';
+import Button from "react-bootstrap/Button";
 
 // Get the cookie for the csrf token, needed for API POST requests
 // https://docs.djangoproject.com/en/dev/ref/csrf/#ajax
@@ -24,26 +24,36 @@ const csrftoken = getCookie("csrftoken");
 function App() {
   const [pestTraps, setPestTraps] = useState([]);
   const [profile, setProfile] = useState([]);
-  const [uniqueId, setUniqueId] = useState("")
+  const [uniqueId, setUniqueId] = useState("");
+  const [subscribed, setSubscribed] = useState(false);
 
   useEffect(() => {
     fetch("/api/pestTrap/")
       .then((response) => response.json())
-      .then((data) => {console.log(data);setPestTraps(data)});
-  }, []);
-
-  useEffect(() => {
+      .then((data) => {
+        console.log(data);
+        setPestTraps(data);
+      });
     fetch("/api/profile/")
       .then((response) => response.json())
       .then((data) => {
-        setProfile(data)
-        console.log('profile',profile)
+        setProfile(data);
+        console.log(data[0].id);
       });
   }, []);
 
+  // useEffect(() => {
+  //   fetch("/api/profile/")
+  //     .then((response) => response.text())
+  //     .then((data) => {
+  //       setProfile(data);
+  //       console.log(data.data);
+  //     });
+  // }, []);
+
   function addMeToTrap(e, pestTrap) {
     e.preventDefault();
-    console.log("Pest trap body",pestTrap)
+    console.log("Pest trap body", pestTrap);
     fetch(`/api/pestTrap/${pestTrap.id}/`, {
       method: "put",
       headers: {
@@ -51,33 +61,92 @@ function App() {
         "Content-Type": "application/json",
         "X-CSRFToken": csrftoken,
       },
-      body:  JSON.stringify({...pestTrap, description: "edited", users: [...pestTrap.users, profile]}),
+      body: JSON.stringify({
+        ...pestTrap,
+        users: [...pestTrap.users, profile[0].id],
+      }),
     })
       .then((res) => res.json())
-      .then((res) => console.log(res));
+      .then((res) => {
+        setSubscribed(true);
+      });
   }
 
   const _onSubmit = (event) => {
-    setUniqueId(event.target.value)
-  }
-  console.log('uniqueId Entered: ',uniqueId)
+    setUniqueId(event.target.value);
+  };
 
   return (
     <div className="App">
-      <p>Hello world</p>
+      <h1>Find Your Fly Trap</h1>
       <form>
-        <label htmlFor="uniqueId">Set Unique Id</label>
-        <input onChange={(event) => setUniqueId(event.target.value)} value={uniqueId} name="uniqueId" type="text" placeholder="Enter Unique Id"/>
+        <label htmlFor="uniqueId">Type in the Unique Id Posted to you:</label>
+        <input
+          onChange={(event) => setUniqueId(event.target.value)}
+          value={uniqueId}
+          name="uniqueId"
+          type="text"
+          placeholder="Enter Unique Id"
+        />
       </form>
+      <h2>Subscribed Traps</h2>
+      <ol>
+        {pestTraps
+          .filter((pestTrap) => {
+            console.log("pest trap profile", profile[0].id);
+            return pestTrap.users.some((user) => {
+              console.log("user id", user);
+              console.log("profile id", profile[0].id)
+              return user == profile[0].id;
+            });
+          })
+          .map((pestTrap) => (
+            <li key={pestTrap.id}>
+              <p>Name: {pestTrap.name}</p>
+              <p>Description: {pestTrap.description}</p>
+              {subscribed && (
+                <div>
+                  <b>Success! You are now subscribed</b>
+                </div>
+              )}
+            </li>
+          ))}
+      </ol>
       <form>
-        <p>{uniqueId}</p>
         <ol>
-          {pestTraps.filter((pestTrap) => pestTrap.UniqueId === uniqueId).map(pestTrap => <li key={pestTrap.id}>
-            <p>Name: {pestTrap.name}</p>
-            <p>Description: {pestTrap.description}</p>
-            <ul>{pestTrap.users.map((user, index) => <li key={index}>{user}</li>)}</ul>
-            <Button className="btn btn-primary" onClick={(event) => addMeToTrap(event, pestTrap)}>Subscribe to Pest Trap</Button>
-          </li>)}
+          {pestTraps
+            .filter((pestTrap) => pestTrap.UniqueId === uniqueId)
+            .map((pestTrap) => (
+              <li key={pestTrap.id}>
+                <p>Name: {pestTrap.name}</p>
+                <p>Description: {pestTrap.description}</p>
+                {/* <ul>{pestTrap.users.map((user, index) => <li key={index}>{user}</li>)}</ul> */}
+                {!subscribed ? (
+                  <>
+                    <Button
+                      className="btn btn-primary"
+                      onClick={(event) => addMeToTrap(event, pestTrap)}
+                    >
+                      Subscribe to Pest Trap
+                    </Button>
+                  </>
+                ) : (
+                  <>
+                    <h2>There are no reported events at this Fruit Trap</h2>
+                    <img
+                      src="https://www.moira.vic.gov.au/files/content/public/business/queensland-fruit-fly-project/qff-logo-update-red.png?dimension=pageimage&w=480"
+                      alt=""
+                      srcset=""
+                    />
+                  </>
+                )}
+                {subscribed && (
+                  <div>
+                    <b>Success! You are now subscribed</b>
+                  </div>
+                )}
+              </li>
+            ))}
         </ol>
       </form>
     </div>
