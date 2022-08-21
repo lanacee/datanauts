@@ -27,7 +27,7 @@ export default function Navbar() {
       <NavigationList $align={ALIGN.center} />
       <NavigationList $align={ALIGN.right}>
         <NavigationItem>
-          <Link href="/#/create">Register Trap</Link>
+          <Link href="#/create">Register Trap</Link>
         </NavigationItem>
         {/* <NavigationItem>
           <Link href="/#/edit">Edit User Details</Link>
@@ -38,7 +38,7 @@ export default function Navbar() {
       </NavigationList>
       <NavigationList $align={ALIGN.right}>
         <NavigationItem className={css({ marginRight: "10px" })}>
-          <Button $as="a" href="/#/review">
+          <Button $as="a" href="#/review">
             Review Registered Fruit Traps
           </Button>
         </NavigationItem>
