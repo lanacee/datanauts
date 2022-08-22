@@ -22,13 +22,13 @@ Front-End: _React_
 Back-End: _Django_
 
 ## How to run it
-
-- python3 -m venv venv
-- source venv/bin/activate
-- pip install -r requirements.txt
-- cd frontend && npm install && npm run build
-- python manage.py runserver
-
+```
+python3 -m venv venv;
+source venv/bin/activate;
+pip install -r requirements.txt;
+cd frontend && npm install && npm run build;
+python manage.py runserver;
+```
 ## App Screenshots
 
 ![Readme](docs/CheckIfFound.png)
