@@ -1,5 +1,10 @@
 # 🪰 FlyDar
 
+GO TO SITE:
+[🪰 FLYDAR](https://flydar.herokuapp.com/)
+
+GO TO [Flydar Hackerspace](https://hackerspace.govhack.org/projects/flydar)
+
 ![Readme](docs/RegisterFruitTrap.png)
 
 ## Fruit fly can have a devastating impact on local horticulture industries:
@@ -11,9 +16,9 @@
 
 ## Presentation Videos
 
-[![Watch the video](https://img.youtube.com/vi/Gsn4ufs__EA/maxresdefault.jpg)](https://www.youtube.com/watch?v=lZK5bui-B1A)
+[![Watch the video](https://img.youtube.com/vi/lZK5bui-B1A/maxresdefault.jpg)](https://www.youtube.com/watch?v=lZK5bui-B1A)
 
-- [https://www.youtube.com/watch?v=Gsn4ufs\_\_EA&feature=youtu.be](https://www.youtube.com/watch?v=lZK5bui-B1A)
+- [https://www.youtube.com/watch?v=lZK5bui-B1A](https://www.youtube.com/watch?v=lZK5bui-B1A)
 
 ## Technical Details
 
@@ -22,6 +27,7 @@ Front-End: _React_
 Back-End: _Django_
 
 ## How to run it
+
 ```
 python3 -m venv venv;
 source venv/bin/activate;
@@ -29,6 +35,7 @@ pip install -r requirements.txt;
 cd frontend && npm install && npm run build;
 python ../manage.py runserver;
 ```
+
 ## App Screenshots
 
 ![Readme](docs/CheckIfFound.png)
