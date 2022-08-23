@@ -15,7 +15,8 @@
     "styletron-react": "^6.1.0",
     "email-validator": "^2.0.4",
     "baseui": "^12.0.0",
-    "react-router-dom": "^6.3.0"
+    "react-router-dom": "^6.3.0",
+    "eslint-plugin-baseui": "^12.0.0"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -42,9 +43,6 @@
     ]
   },
   "proxy": "http://localhost:8000",
-  "devDependencies": {
-    "eslint-plugin-baseui": "^12.0.0"
-  },
   "engines": {
     "node": "16.x"
   }
