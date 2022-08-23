@@ -3,6 +3,8 @@
 GO TO SITE:
 [🪰 FLYDAR](https://flydar.herokuapp.com/)
 
+Test it Out by Registering for FlyTrap with Unique ID: **ABC-123**
+
 GO TO [Flydar Hackerspace](https://hackerspace.govhack.org/projects/flydar)
 
 ![Readme](docs/RegisterFruitTrap.png)
