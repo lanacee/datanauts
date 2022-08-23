@@ -1,11 +1,7 @@
-import { useEffect, useState } from "react";
 import "./App.css";
-import Button from "react-bootstrap/Button";
 import { HashRouter as Router, Routes, Route } from "react-router-dom";
 import Frontpage from "./pages/frontpage";
 import Navbar from "./pages/navbar";
-import Edit from "./pages/edit";
-import List from "./pages/list";
 import Review from "./pages/review";
 import Verify from "./pages/verify";
 
